@@ -8,12 +8,12 @@ class AntColony:
         self.dist_matrix = dist_matrix
         self.colony_size = colony_size
         self.generations = generations
-        self.alpha = alpha  # вес феромона
-        self.beta = beta  # вес расстояния
-        self.rho = rho  # коэффициент испарения феромона
-        self.q = q  # количество феромона, откладываемого муравьем
+        self.alpha = alpha
+        self.beta = beta
+        self.rho = rho
+        self.q = q
         self.num_cities = len(dist_matrix)
-        self.pheromone_matrix = np.ones_like(dist_matrix)  # начальное количество феромона на каждом ребре
+        self.pheromone_matrix = np.ones_like(dist_matrix)
 
     def run(self):
         best_route = None
@@ -74,25 +74,19 @@ class AntColony:
         return probabilities
 
     def choose_next_city(self, probs, visited):
-        # Randomly choose the next city based on probabilities
         if np.isnan(probs).any():
-            # If probabilities contain NaNs, choose randomly from unvisited cities
             unvisited = [i for i in range(self.num_cities) if i not in visited]
             return random.choice(unvisited)
         else:
-            # Otherwise, choose according to probabilities
             return np.random.choice(self.num_cities, 1, p=probs)[0]
 
     def update_pheromone(self, all_ant_routes):
-        # Initialize pheromone_delta matrix
         pheromone_delta = np.zeros_like(self.pheromone_matrix)
 
-        # Update pheromone_delta with each ant's contribution
         for path in all_ant_routes:
             for move in path:
                 pheromone_delta[move] += self.q / self.dist_matrix[move]
 
-        # Update global pheromone_matrix using rho
         self.pheromone_matrix = (1 - self.rho) * self.pheromone_matrix + pheromone_delta
 
     def get_best_route(self, all_ant_routes):

@@ -3,7 +3,7 @@ import numpy as np
 def tsp_dp(dist_matrix):
     n = len(dist_matrix)
     dp = np.full((1 << n, n), np.inf)
-    dp[1][0] = 0  # Начальная точка (город 0)
+    dp[1][0] = 0
 
     for mask in range(1 << n):
         for u in range(n):

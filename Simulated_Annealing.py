@@ -4,8 +4,8 @@ import math
 
 def simulated_annealing(dist_matrix):
     num_cities = len(dist_matrix)
-    initial_temp = 1000  # Начальная температура
-    cooling_rate = 0.995  # Коэффициент охлаждения
+    initial_temp = 1000
+    cooling_rate = 0.995
     max_iterations = 10000
     def route_length(route):
         return sum(dist_matrix[route[i]][route[i + 1]] for i in range(len(route) - 1)) + dist_matrix[route[-1]][route[0]]
@@ -33,7 +33,6 @@ def simulated_annealing(dist_matrix):
                 best_route = new_route
                 best_length = new_length
 
-        # Уменьшение температуры
         current_temp *= cooling_rate
 
     return best_route, best_length

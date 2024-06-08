@@ -1,6 +1,5 @@
 import logging
 
-# Настройка логирования
 logging.basicConfig(filefname='tsp_solver.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 

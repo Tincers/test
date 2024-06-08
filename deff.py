@@ -16,7 +16,6 @@ def create_distance_matrix(coords):
     return dist_matrix
 
 
-#Общее
 def get_coordinates(city_names):
     geolocator = Nominatim(user_agent="tsp_solver")
     coords = []
@@ -29,7 +28,6 @@ def get_coordinates(city_names):
     return coords
 
 
-# Функция для преобразования списка городов в координаты и решения задачи коммивояжера
 def solve_tsp(city_names):
     coords = get_coordinates(city_names)
     dist_matrix = create_distance_matrix(coords)
